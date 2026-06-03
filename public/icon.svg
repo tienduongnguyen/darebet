@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#121824"/>
+      <stop offset="1" stop-color="#050913"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.12" r="0.85">
+      <stop offset="0" stop-color="#3bca60" stop-opacity="0.35"/>
+      <stop offset="0.55" stop-color="#21b3ed" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#050913" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112.64" ry="112.64" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="112.64" ry="112.64" fill="url(#glow)"/>
+  <g transform="rotate(8 256 256)">
+    <circle cx="256" cy="256" r="184.32" fill="#ffffff"/>
+    <circle cx="256" cy="256" r="184.32" fill="none" stroke="#050913" stroke-width="8.29"/>
+    <line x1="256.00" y1="184.12" x2="256.00" y2="74.44" stroke="#050913" stroke-width="9.22" stroke-linecap="round"/><line x1="324.37" y1="233.79" x2="428.67" y2="199.90" stroke="#050913" stroke-width="9.22" stroke-linecap="round"/><line x1="298.25" y1="314.16" x2="362.72" y2="402.88" stroke="#050913" stroke-width="9.22" stroke-linecap="round"/><line x1="213.75" y1="314.16" x2="149.28" y2="402.88" stroke="#050913" stroke-width="9.22" stroke-linecap="round"/><line x1="187.63" y1="233.79" x2="83.33" y2="199.90" stroke="#050913" stroke-width="9.22" stroke-linecap="round"/>
+    <polygon points="376.57,184.12 314.75,204.21 276.54,151.62 314.75,99.03 376.57,119.12" fill="#050913"/><polygon points="361.62,348.46 323.41,295.87 361.62,243.28 423.44,263.37 423.44,328.37" fill="#050913"/><polygon points="200.70,385.02 238.91,332.43 300.74,352.52 300.74,417.53 238.91,437.61" fill="#050913"/><polygon points="116.20,243.28 178.03,263.37 178.03,328.37 116.20,348.46 77.99,295.87" fill="#050913"/><polygon points="224.90,119.12 224.90,184.12 163.07,204.21 124.87,151.62 163.07,99.03" fill="#050913"/>
+    <polygon points="256.00,184.12 324.37,233.79 298.25,314.16 213.75,314.16 187.63,233.79" fill="#3bca60"/>
+  </g>
+</svg>

@@ -1,0 +1,20 @@
+export const PASSCODE_PATTERN = /^\d{4}$/;
+
+const UUID_PATTERN =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+export const sanitizeText = (value: unknown): string => {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  return value.trim();
+};
+
+export const isUuid = (value: string): boolean => UUID_PATTERN.test(value);
+
+export const isValidPasscode = (value: string): boolean =>
+  PASSCODE_PATTERN.test(value);
+
+export const isVotePick = (value: string): value is "home" | "away" =>
+  value === "home" || value === "away";

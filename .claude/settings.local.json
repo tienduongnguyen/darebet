@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm i *)",
+      "Bash(node *)",
+      "Bash(npx next *)",
+      "Bash(npx eslint *)",
+      "Bash(echo \"ESLINT_EXIT=$?\")",
+      "Bash(xargs -I{} sh -c 'echo \"{}:\"; grep -o \"\\\\.btn-primary\\\\|\\\\.card-body\\\\|--color-primary\\\\|darebet\" {} | sort -u | head -8')",
+      "Bash(perl -i -pe 's/^\\\\s*\\\\.replace\\\\\\(.*$/    .replace\\(\\\\/[\\\\\\\\u0300-\\\\\\\\u036f]\\\\/g, \"\"\\)/ if $. == 172; $_ = \"\" if $. == 173' lib/domain/country-flags.ts)",
+      "Bash(sed -n '168,184p' lib/domain/country-flags.ts)",
+      "Bash(npx tsx -e ' *)",
+      "Bash(curl -s \"https://dgawhggqkuwygwkumpem.supabase.co/rest/v1/matches_cache?select=home_team,away_team\" -H \"apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRnYXdoZ2dxa3V3eWd3a3VtcGVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzODA3MTQsImV4cCI6MjA5NTk1NjcxNH0.7tB3ATKadAjlLD2ZOzUt6OQMhM530XopPU2V272hzFY\")",
+      "Bash(curl -s \"https://dgawhggqkuwygwkumpem.supabase.co/rest/v1/matches_cache?select=home_team,away_team\" -H \"apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRnYXdoZ2dxa3V3eWd3a3VtcGVtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDM4MDcxNCwiZXhwIjoyMDk1OTU2NzE0fQ.5J5RMkWC2rXL8lU1lQPAGtmHJwTIsJUPmQHpzZpuWKY\" -H \"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRnYXdoZ2dxa3V3eWd3a3VtcGVtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDM4MDcxNCwiZXhwIjoyMDk1OTU2NzE0fQ.5J5RMkWC2rXL8lU1lQPAGtmHJwTIsJUPmQHpzZpuWKY\")",
+      "Bash(npx tsx *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(*)"
+    ]
+  }
+}
