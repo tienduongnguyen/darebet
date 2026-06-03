@@ -176,8 +176,13 @@ export const moderatePunishment = async (
   try {
     const completion = await client.chat.completions.create({
       model: serverEnv.OPENAI_MODEL,
-      temperature: 0,
-      max_completion_tokens: 120,
+      // GPT-5 family (e.g. gpt-5-nano) are reasoning models: they only accept
+      // the default temperature, so we omit it rather than send 0 (which 400s).
+      // `reasoning_effort: minimal` keeps this classification fast/cheap, and a
+      // generous token cap leaves room for reasoning + the JSON output (the cap
+      // is a ceiling, only spent tokens are billed).
+      reasoning_effort: "low",
+      max_completion_tokens: 2000,
       response_format: { type: "json_object" },
       messages: [
         { role: "system", content: SYSTEM_PROMPT },

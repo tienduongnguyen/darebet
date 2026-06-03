@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:moderation": "node --env-file=.env.local --conditions=react-server --import tsx scripts/test-moderation.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.107.0",
@@ -23,7 +24,9 @@
     "daisyui": "^5.5.20",
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
+    "server-only": "^0.0.1",
     "tailwindcss": "^4",
+    "tsx": "^4.22.4",
     "typescript": "^5"
   }
 }
