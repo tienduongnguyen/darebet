@@ -5,7 +5,6 @@ import type {
   ChallengeVoteEntity,
   MatchStatus,
   MatchesCacheEntity,
-  RoomEntity,
   RoomMemberEntity,
   UUID,
   VotePick,
@@ -27,7 +26,6 @@ export type ChallengeServiceErrorCode =
   | "punishment_rejected"
   | "room_not_found"
   | "not_room_member"
-  | "not_room_host"
   | "match_not_found"
   | "match_not_open"
   | "voting_closed"
@@ -196,26 +194,6 @@ const pickSingleRecord = <T>(rows: T[] | null | undefined): T | null => {
   return rows[0] ?? null;
 };
 
-const findRoom = async (roomId: UUID): Promise<RoomEntity> => {
-  const rows = await supabaseRest<RoomEntity[]>({
-    endpoint: "rooms",
-    method: "GET",
-    query: {
-      select: "id,room_name,passcode,created_by,created_at",
-      id: `eq.${roomId}`,
-      limit: 1,
-    },
-  });
-
-  const room = pickSingleRecord(rows);
-
-  if (!room) {
-    throw new ChallengeServiceError("room_not_found", "Room does not exist.");
-  }
-
-  return room;
-};
-
 const ensureMembership = async (
   roomId: UUID,
   guestId: UUID,
@@ -322,15 +300,7 @@ export const createChallenge = async (
   const punishment = normalizePunishment(input.punishment);
 
   try {
-    const room = await findRoom(roomId);
-
-    if (room.created_by !== guestId) {
-      throw new ChallengeServiceError(
-        "not_room_host",
-        "Only the room host can start a challenge.",
-      );
-    }
-
+    // Any room member can start a challenge (not just the host).
     const [, match] = await Promise.all([
       ensureMembership(
         roomId,

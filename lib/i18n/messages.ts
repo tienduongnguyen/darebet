@@ -44,6 +44,12 @@ const en = {
   "home.create.passLegend": "4-digit passcode",
   "home.create.passPlaceholder": "1234",
   "home.create.errName": "Room name must be between 3 and 40 characters.",
+  "home.create.errRoomLimit":
+    "You can only create one room per day. Please try again later.",
+  "home.create.errRoomNameBlocked":
+    "This room name was blocked for unsafe content (money betting, NSFW, or illegal). Please choose another name.",
+  "home.errNameBlocked":
+    "This display name was blocked for unsafe content. Please choose another name.",
   "home.create.errPass": "Passcode must be exactly 4 digits.",
   "home.create.submit": "Create room",
   "home.create.submitting": "Creating room...",
@@ -113,7 +119,7 @@ const en = {
   "room.matches.hintHost":
     "Tap a match to select it for a new challenge. Win chances come from the latest odds snapshot.",
   "room.matches.hintGuest":
-    "Win chances come from the latest odds snapshot. Only the host can start a challenge.",
+    "Win chances come from the latest odds snapshot. Join the room to start a challenge.",
   "room.matches.empty": "No matches available right now.",
   "room.matches.selected": "✓ Selected",
   "room.matches.challengeCreated": "Challenge created",
@@ -151,7 +157,7 @@ const en = {
     "Vote Home or Away before the deadline. A drawn match means everyone ties — no punishment.",
   "room.ch.emptyHost":
     "No challenges yet. Select a match above to start the first one.",
-  "room.ch.emptyGuest": "No challenges yet. Waiting for the host to start one.",
+  "room.ch.emptyGuest": "No challenges yet. Join the room to start one.",
   "room.ch.matchUnavailable": "Match unavailable",
   "room.ch.finalScore": " • Final score {home} - {away}",
   "room.ch.startedBy": "Started by {name} • {date}",
@@ -229,6 +235,12 @@ const vi: Record<MessageKey, string> = {
   "home.create.passLegend": "Mật khẩu 4 số",
   "home.create.passPlaceholder": "1234",
   "home.create.errName": "Tên phòng phải từ 3 đến 40 ký tự.",
+  "home.create.errRoomLimit":
+    "Mỗi ngày chỉ được tạo 1 phòng. Vui lòng thử lại sau.",
+  "home.create.errRoomNameBlocked":
+    "Tên phòng bị chặn vì nội dung không phù hợp (cá độ tiền, NSFW hoặc phạm pháp). Vui lòng chọn tên khác.",
+  "home.errNameBlocked":
+    "Tên hiển thị bị chặn vì nội dung không phù hợp. Vui lòng chọn tên khác.",
   "home.create.errPass": "Mật khẩu phải gồm đúng 4 chữ số.",
   "home.create.submit": "Tạo phòng",
   "home.create.submitting": "Đang tạo phòng...",
@@ -294,7 +306,7 @@ const vi: Record<MessageKey, string> = {
   "room.matches.hintHost":
     "Chạm vào một trận để chọn lập kèo mới. Tỷ lệ thắng lấy từ bảng kèo mới nhất.",
   "room.matches.hintGuest":
-    "Tỷ lệ thắng lấy từ bảng kèo mới nhất. Chỉ chủ phòng mới mở được kèo thách đấu.",
+    "Tỷ lệ thắng lấy từ bảng kèo mới nhất. Vào phòng để mở kèo thách đấu.",
   "room.matches.empty": "Hiện chưa có trận nào.",
   "room.matches.selected": "✓ Đã chọn",
   "room.matches.challengeCreated": "Đã có kèo",
@@ -330,7 +342,7 @@ const vi: Record<MessageKey, string> = {
     "Chốt kèo Đội nhà hoặc Đội khách trước hạn. Trận hòa nghĩa là tất cả hòa — không ai bị phạt.",
   "room.ch.emptyHost":
     "Chưa có kèo nào. Chọn một trận ở trên để mở kèo đầu tiên.",
-  "room.ch.emptyGuest": "Chưa có kèo nào. Đang chờ chủ phòng mở kèo.",
+  "room.ch.emptyGuest": "Chưa có kèo nào. Vào phòng để mở kèo.",
   "room.ch.matchUnavailable": "Không có thông tin trận",
   "room.ch.finalScore": " • Tỷ số chung cuộc {home} - {away}",
   "room.ch.startedBy": "Mở bởi {name} • {date}",

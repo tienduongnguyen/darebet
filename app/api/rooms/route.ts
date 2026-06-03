@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { getClientIp } from "@/lib/server/rate-limit";
 import {
   createRoom,
   listRoomsForGuest,
@@ -37,6 +38,9 @@ export async function GET(request: Request) {
     if (error instanceof RoomServiceError) {
       const statusByErrorCode: Record<string, number> = {
         invalid_guest_id: 400,
+        room_name_rejected: 422,
+        display_name_rejected: 422,
+        room_limit_reached: 429,
       };
 
       return NextResponse.json(
@@ -90,6 +94,7 @@ export async function POST(request: Request) {
       passcode: payload.passcode,
       guestId: payload.guestId,
       displayName: payload.displayName,
+      creatorIp: getClientIp(request.headers),
     });
 
     return NextResponse.json(

@@ -22,7 +22,6 @@ const statusByChallengeErrorCode: Record<string, number> = {
   punishment_rejected: 422,
   room_not_found: 404,
   not_room_member: 403,
-  not_room_host: 403,
   match_not_found: 404,
   match_not_open: 409,
   voting_closed: 409,

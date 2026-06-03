@@ -59,6 +59,7 @@ export async function POST(request: Request) {
       const statusByErrorCode: Record<string, number> = {
         invalid_guest_id: 400,
         invalid_display_name: 400,
+        display_name_rejected: 422,
         invalid_room_id: 400,
         invalid_passcode: 400,
         room_not_found: 404,

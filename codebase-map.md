@@ -25,9 +25,10 @@ Supabase (Postgres + Realtime)**. Match data refreshes on-demand via `POST /api/
   - `sync-service.ts` — `runOddsSync` / `runResultSync`, plus `runOnDemandSync` (60s-cooldown wrapper called on user refresh). Odds & result writes own disjoint columns so they never clobber each other.
   - `odds-api.ts` — The Odds API client (`fetchOddsSnapshot`, `fetchResultSnapshot`)
   - `supabase-rest.ts` — `supabaseRest<T>()` REST helper + `SupabaseRestError`
+  - `rate-limit.ts` — `getClientIp()` + in-memory `checkRoomCreation`/`recordRoomCreation` (1 room per IP per rolling 24h). Best-effort only: the Map is per-instance and lost on serverless cold start. Used by `createRoom`.
   - `realtime-token.ts` — `mintRealtimeToken()` per-guest JWT (see memory: realtime-auth-design)
   - `proof-service.ts` — proof workflow (note: proof upload deprecated, see spec)
-  - `moderation-service.ts` — `moderatePunishment()` LLM content filter (OpenAI) blocking gambling/NSFW/gore/illegal dares. Fail-open: skipped when `OPENAI_API_KEY` unset or on API error. Called by `createChallenge`.
+  - `moderation-service.ts` — `moderateText(text, kind)` LLM content filter (OpenAI) blocking gambling/NSFW/gore/illegal content; `kind` ∈ punishment | room_name | display_name (per-kind prompt). `moderatePunishment()` is a wrapper. Fail-open when `OPENAI_API_KEY` unset or on API error, fail-closed on unreadable output. Called by `createChallenge` (punishment) and `createRoom`/`joinRoom` (names).
 - `lib/browser/supabase-client.ts` — `getBrowserSupabaseClient()` singleton (client-side)
 - `lib/hooks/` — client React hooks: `use-guest-identity.ts`, `use-room-realtime.ts`
 - `lib/i18n/` — client i18n (no dependency). `messages.ts` (EN/VI dictionary; `en` is the `MessageKey` source of truth, `vi` is type-enforced to match), `context.tsx` (`LanguageProvider` + `useI18n()` → `{ locale, setLocale, t, formatDateTime }`; locale in `localStorage` `darebet_locale`, auto-detected from `navigator.language` on first visit)
