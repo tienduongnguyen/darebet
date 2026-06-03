@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 
 import { getTeamFlag } from "@/lib/domain/country-flags";
+import { pickRandomChallenge } from "@/lib/domain/challenge-suggestions";
 import { calculateOddsPercentages, formatPercentage } from "@/lib/domain/odds";
 import { useGuestIdentity } from "@/lib/hooks/use-guest-identity";
 import {
@@ -173,7 +174,7 @@ const readApiErrorMessage = async (
 };
 
 export function RoomDashboard({ roomId }: RoomDashboardProps) {
-  const { t, formatDateTime } = useI18n();
+  const { t, formatDateTime, locale } = useI18n();
   const { profile, isBootstrapping } = useGuestIdentity();
   const [membersData, setMembersData] = useState<RoomMembersPayload | null>(null);
   const [matches, setMatches] = useState<MatchFeedPayload["matches"]>([]);
@@ -376,6 +377,11 @@ export function RoomDashboard({ roomId }: RoomDashboardProps) {
     setComposerSuccess("");
     setSelectedMatchId((current) => (current === match.id ? "" : match.id));
   };
+
+  const handleRandomPunishment = useCallback(() => {
+    setComposerError("");
+    setPunishmentInput((current) => pickRandomChallenge(locale, current));
+  }, [locale]);
 
   const handleCreateChallenge = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -927,8 +933,18 @@ export function RoomDashboard({ roomId }: RoomDashboardProps) {
 
               <form onSubmit={handleCreateChallenge}>
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend">
-                    {t("room.composer.punishLegend")}
+                  <legend className="fieldset-legend flex w-full items-center justify-between gap-2">
+                    <span>{t("room.composer.punishLegend")}</span>
+                    <button
+                      type="button"
+                      onClick={handleRandomPunishment}
+                      className="btn btn-ghost btn-xs gap-1 normal-case"
+                      title={t("room.composer.diceTooltip")}
+                      aria-label={t("room.composer.diceLabel")}
+                    >
+                      <span aria-hidden className="text-base leading-none">🎲</span>
+                      {t("room.composer.diceLabel")}
+                    </button>
                   </legend>
                   <textarea
                     className="textarea min-h-24 w-full"

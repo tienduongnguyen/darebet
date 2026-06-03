@@ -141,6 +141,8 @@ const en = {
   "room.composer.punishPlaceholder":
     "Write the dare for everyone who votes for the losing team",
   "room.composer.punishHint": "Between 3 and 220 characters",
+  "room.composer.diceLabel": "Random",
+  "room.composer.diceTooltip": "Roll a random dare into the box",
   "room.composer.errSelect":
     "Please select a match from the upcoming matches list.",
   "room.composer.errPunish": "Punishment must be between 3 and 220 characters.",
@@ -328,6 +330,8 @@ const vi: Record<MessageKey, string> = {
   "room.composer.punishPlaceholder":
     "Viết hình phạt cho những ai chốt kèo đội thua",
   "room.composer.punishHint": "Từ 3 đến 220 ký tự",
+  "room.composer.diceLabel": "Ngẫu nhiên",
+  "room.composer.diceTooltip": "Random một thử thách vào ô nhập",
   "room.composer.errSelect":
     "Vui lòng chọn một trận trong danh sách trận sắp diễn ra.",
   "room.composer.errPunish": "Hình phạt phải từ 3 đến 220 ký tự.",
