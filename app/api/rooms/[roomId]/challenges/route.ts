@@ -19,6 +19,7 @@ const statusByChallengeErrorCode: Record<string, number> = {
   invalid_match_id: 400,
   invalid_pick: 400,
   invalid_punishment: 400,
+  punishment_rejected: 422,
   room_not_found: 404,
   not_room_member: 403,
   not_room_host: 403,

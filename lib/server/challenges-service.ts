@@ -12,6 +12,7 @@ import type {
 } from "@/lib/types/domain";
 import { isUuid, isVotePick, sanitizeText } from "@/lib/validation/common";
 
+import { moderatePunishment } from "./moderation-service";
 import { SupabaseRestError, supabaseRest } from "./supabase-rest";
 
 export const VOTING_LOCK_BEFORE_KICKOFF_MS = 10 * 60 * 1000;
@@ -23,6 +24,7 @@ export type ChallengeServiceErrorCode =
   | "invalid_match_id"
   | "invalid_pick"
   | "invalid_punishment"
+  | "punishment_rejected"
   | "room_not_found"
   | "not_room_member"
   | "not_room_host"
@@ -345,6 +347,15 @@ export const createChallenge = async (
       throw new ChallengeServiceError(
         "voting_closed",
         "Voting closes 10 minutes before kickoff; this match is too close to start.",
+      );
+    }
+
+    const moderation = await moderatePunishment(punishment);
+
+    if (!moderation.allowed) {
+      throw new ChallengeServiceError(
+        "punishment_rejected",
+        `Punishment was rejected by content moderation (${moderation.category}): ${moderation.reason ?? "violates community guidelines."}`,
       );
     }
 

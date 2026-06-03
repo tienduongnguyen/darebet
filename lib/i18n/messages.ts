@@ -138,6 +138,8 @@ const en = {
   "room.composer.errSelect":
     "Please select a match from the upcoming matches list.",
   "room.composer.errPunish": "Punishment must be between 3 and 220 characters.",
+  "room.composer.errBlocked":
+    "This punishment was blocked for unsafe content (money betting, NSFW, gore, or illegal activity). Please write a harmless dare.",
   "room.composer.errCreate":
     "Could not create challenge right now. Please retry.",
   "room.composer.success":
@@ -317,6 +319,8 @@ const vi: Record<MessageKey, string> = {
   "room.composer.errSelect":
     "Vui lòng chọn một trận trong danh sách trận sắp diễn ra.",
   "room.composer.errPunish": "Hình phạt phải từ 3 đến 220 ký tự.",
+  "room.composer.errBlocked":
+    "Hình phạt bị chặn vì nội dung không phù hợp (cá độ tiền thật, NSFW, máu me hoặc phạm pháp). Vui lòng nhập một thử thách vô hại.",
   "room.composer.errCreate": "Không thể tạo kèo lúc này. Vui lòng thử lại.",
   "room.composer.success": "Đã tạo kèo. Cả phòng có thể chốt kèo ngay bây giờ.",
   "room.composer.submit": "Mở kèo",
