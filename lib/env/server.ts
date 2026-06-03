@@ -28,4 +28,7 @@ export const serverEnv = {
   // skipped (fail-open) so the app still runs without it.
   OPENAI_API_KEY: process.env.OPENAI_API_KEY ?? null,
   OPENAI_MODEL: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
+  // Optional: override the API base URL to point at an OpenAI-compatible
+  // third-party endpoint. Unset = the official OpenAI API.
+  OPENAI_BASE_URL: process.env.OPENAI_BASE_URL ?? null,
 };
