@@ -3,12 +3,15 @@ import "server-only";
 import type { RoomEntity, RoomMemberEntity } from "@/lib/types/domain";
 import { isUuid, isValidPasscode, sanitizeText } from "@/lib/validation/common";
 
+import { moderateText } from "./moderation-service";
 import { SupabaseRestError, supabaseRest } from "./supabase-rest";
 
 export type RoomServiceErrorCode =
   | "invalid_guest_id"
   | "invalid_display_name"
   | "invalid_room_name"
+  | "room_name_rejected"
+  | "display_name_rejected"
   | "invalid_room_id"
   | "invalid_passcode"
   | "room_not_found"
@@ -64,6 +67,28 @@ const normalizeDisplayName = (value: string): string => {
   }
 
   return normalized;
+};
+
+const ensureRoomNameAllowed = async (roomName: string): Promise<void> => {
+  const verdict = await moderateText(roomName, "room_name");
+
+  if (!verdict.allowed) {
+    throw new RoomServiceError(
+      "room_name_rejected",
+      `Room name was rejected by content moderation (${verdict.category}): ${verdict.reason ?? "violates community guidelines."}`,
+    );
+  }
+};
+
+const ensureDisplayNameAllowed = async (displayName: string): Promise<void> => {
+  const verdict = await moderateText(displayName, "display_name");
+
+  if (!verdict.allowed) {
+    throw new RoomServiceError(
+      "display_name_rejected",
+      `Display name was rejected by content moderation (${verdict.category}): ${verdict.reason ?? "violates community guidelines."}`,
+    );
+  }
 };
 
 const assertGuestId = (guestId: string): string => {
@@ -127,6 +152,11 @@ export const createRoom = async (
   const passcode = assertPasscode(input.passcode);
   const guestId = assertGuestId(input.guestId);
   const displayName = normalizeDisplayName(input.displayName);
+
+  await Promise.all([
+    ensureRoomNameAllowed(roomName),
+    ensureDisplayNameAllowed(displayName),
+  ]);
 
   let room: RoomEntity | null = null;
 
@@ -212,6 +242,8 @@ export const joinRoom = async (
   const passcode = assertPasscode(input.passcode);
   const guestId = assertGuestId(input.guestId);
   const displayName = normalizeDisplayName(input.displayName);
+
+  await ensureDisplayNameAllowed(displayName);
 
   try {
     const rooms = await supabaseRest<RoomEntity[]>({

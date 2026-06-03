@@ -37,6 +37,8 @@ export async function GET(request: Request) {
     if (error instanceof RoomServiceError) {
       const statusByErrorCode: Record<string, number> = {
         invalid_guest_id: 400,
+        room_name_rejected: 422,
+        display_name_rejected: 422,
       };
 
       return NextResponse.json(

@@ -64,6 +64,14 @@ const readApiErrorMessage = async (
   try {
     const payload = (await response.json()) as ApiErrorPayload;
 
+    if (payload.code === "room_name_rejected") {
+      return t("home.create.errRoomNameBlocked");
+    }
+
+    if (payload.code === "display_name_rejected") {
+      return t("home.errNameBlocked");
+    }
+
     if (typeof payload.error === "string" && payload.error.length > 0) {
       return payload.error;
     }

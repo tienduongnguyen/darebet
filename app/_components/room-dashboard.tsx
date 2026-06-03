@@ -210,8 +210,9 @@ export function RoomDashboard({ roomId }: RoomDashboardProps) {
   }, []);
 
   const guestId = profile?.guest_id;
-  const isHost = Boolean(
-    guestId && membersData && membersData.room.created_by === guestId,
+  const isMember = Boolean(
+    guestId &&
+      membersData?.members.some((member) => member.guest_id === guestId),
   );
 
   const selectedMatch = matches.find((match) => match.id === selectedMatchId);
@@ -750,7 +751,7 @@ export function RoomDashboard({ roomId }: RoomDashboardProps) {
                 {t("room.matches.title")}
               </h2>
               <p className="text-sm text-base-content/70">
-                {isHost
+                {isMember
                   ? t("room.matches.hintHost")
                   : t("room.matches.hintGuest")}
               </p>
@@ -895,7 +896,7 @@ export function RoomDashboard({ roomId }: RoomDashboardProps) {
           </section>
         )}
 
-        {!isBootstrapping && profile && isHost && (
+        {!isBootstrapping && profile && isMember && (
           <section className="card card-border border-base-content/5 bg-base-100 shadow-md animate-rise stagger-4">
             <div className="card-body">
               <h2 className="card-title font-display text-2xl uppercase tracking-wide">
@@ -983,7 +984,7 @@ export function RoomDashboard({ roomId }: RoomDashboardProps) {
 
               {challenges.length === 0 ? (
                 <p className="mt-3 text-sm text-base-content/70">
-                  {isHost
+                  {isMember
                     ? t("room.ch.emptyHost")
                     : t("room.ch.emptyGuest")}
                 </p>
