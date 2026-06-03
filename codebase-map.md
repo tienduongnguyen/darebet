@@ -27,6 +27,7 @@ Supabase (Postgres + Realtime)**. Match data refreshes on-demand via `POST /api/
   - `supabase-rest.ts` — `supabaseRest<T>()` REST helper + `SupabaseRestError`
   - `realtime-token.ts` — `mintRealtimeToken()` per-guest JWT (see memory: realtime-auth-design)
   - `proof-service.ts` — proof workflow (note: proof upload deprecated, see spec)
+  - `moderation-service.ts` — `moderatePunishment()` LLM content filter (OpenAI) blocking gambling/NSFW/gore/illegal dares. Fail-open: skipped when `OPENAI_API_KEY` unset or on API error. Called by `createChallenge`.
 - `lib/browser/supabase-client.ts` — `getBrowserSupabaseClient()` singleton (client-side)
 - `lib/hooks/` — client React hooks: `use-guest-identity.ts`, `use-room-realtime.ts`
 - `lib/i18n/` — client i18n (no dependency). `messages.ts` (EN/VI dictionary; `en` is the `MessageKey` source of truth, `vi` is type-enforced to match), `context.tsx` (`LanguageProvider` + `useI18n()` → `{ locale, setLocale, t, formatDateTime }`; locale in `localStorage` `darebet_locale`, auto-detected from `navigator.language` on first visit)

@@ -158,6 +158,10 @@ const readApiErrorMessage = async (
   try {
     const payload = (await response.json()) as ApiErrorPayload;
 
+    if (payload.code === "punishment_rejected") {
+      return t("room.composer.errBlocked");
+    }
+
     if (typeof payload.error === "string" && payload.error.length > 0) {
       return payload.error;
     }

@@ -23,4 +23,9 @@ export const serverEnv = {
   // JWT Settings). Required only to enable authenticated Realtime
   // subscriptions; when unset, clients fall back to polling.
   SUPABASE_JWT_SECRET: process.env.SUPABASE_JWT_SECRET ?? null,
+  // Optional: OpenAI API key enabling LLM moderation of punishment text
+  // (gambling / NSFW / gore / illegal content). When unset, moderation is
+  // skipped (fail-open) so the app still runs without it.
+  OPENAI_API_KEY: process.env.OPENAI_API_KEY ?? null,
+  OPENAI_MODEL: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
 };
