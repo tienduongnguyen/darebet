@@ -18,7 +18,7 @@ Supabase (Postgres + Realtime)**. Match data refreshes on-demand via `POST /api/
 - `PROJECT_SPEC.md` — product + DB schema spec
 
 ## `lib/` — organized by execution boundary (IMPORTANT)
-- `lib/domain/` — **pure** logic, no I/O. `odds.ts` (odds→%), `leaderboard.ts`, `country-flags.ts`
+- `lib/domain/` — **pure** logic, no I/O. `odds.ts` (odds→%), `leaderboard.ts`, `country-flags.ts`, `challenge-suggestions.ts` (200 VI + 200 EN family-friendly dare suggestions + `pickRandomChallenge(locale, exclude?)`; powers the 🎲 dice button in the challenge composer)
 - `lib/server/` — server-only services & I/O. NEVER import from client.
   - `challenges-service.ts` — challenges CRUD, voting, punishment, match feed (largest file)
   - `rooms-service.ts` — create/join room, list rooms & members for a guest
