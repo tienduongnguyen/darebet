@@ -44,6 +44,8 @@ const en = {
   "home.create.passLegend": "4-digit passcode",
   "home.create.passPlaceholder": "1234",
   "home.create.errName": "Room name must be between 3 and 40 characters.",
+  "home.create.errRoomLimit":
+    "You can only create one room per day. Please try again later.",
   "home.create.errRoomNameBlocked":
     "This room name was blocked for unsafe content (money betting, NSFW, or illegal). Please choose another name.",
   "home.errNameBlocked":
@@ -233,6 +235,8 @@ const vi: Record<MessageKey, string> = {
   "home.create.passLegend": "Mật khẩu 4 số",
   "home.create.passPlaceholder": "1234",
   "home.create.errName": "Tên phòng phải từ 3 đến 40 ký tự.",
+  "home.create.errRoomLimit":
+    "Mỗi ngày chỉ được tạo 1 phòng. Vui lòng thử lại sau.",
   "home.create.errRoomNameBlocked":
     "Tên phòng bị chặn vì nội dung không phù hợp (cá độ tiền, NSFW hoặc phạm pháp). Vui lòng chọn tên khác.",
   "home.errNameBlocked":

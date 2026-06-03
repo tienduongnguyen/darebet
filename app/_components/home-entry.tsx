@@ -64,6 +64,10 @@ const readApiErrorMessage = async (
   try {
     const payload = (await response.json()) as ApiErrorPayload;
 
+    if (payload.code === "room_limit_reached") {
+      return t("home.create.errRoomLimit");
+    }
+
     if (payload.code === "room_name_rejected") {
       return t("home.create.errRoomNameBlocked");
     }

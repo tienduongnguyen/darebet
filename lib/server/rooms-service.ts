@@ -4,6 +4,7 @@ import type { RoomEntity, RoomMemberEntity } from "@/lib/types/domain";
 import { isUuid, isValidPasscode, sanitizeText } from "@/lib/validation/common";
 
 import { moderateText } from "./moderation-service";
+import { checkRoomCreation, recordRoomCreation } from "./rate-limit";
 import { SupabaseRestError, supabaseRest } from "./supabase-rest";
 
 export type RoomServiceErrorCode =
@@ -12,6 +13,7 @@ export type RoomServiceErrorCode =
   | "invalid_room_name"
   | "room_name_rejected"
   | "display_name_rejected"
+  | "room_limit_reached"
   | "invalid_room_id"
   | "invalid_passcode"
   | "room_not_found"
@@ -34,6 +36,8 @@ interface CreateRoomInput {
   passcode: string;
   guestId: string;
   displayName: string;
+  /** Client IP for the 1-room-per-day rate limit; null when unavailable. */
+  creatorIp: string | null;
 }
 
 interface JoinRoomInput {
@@ -152,6 +156,19 @@ export const createRoom = async (
   const passcode = assertPasscode(input.passcode);
   const guestId = assertGuestId(input.guestId);
   const displayName = normalizeDisplayName(input.displayName);
+  const creatorIp = input.creatorIp;
+
+  if (creatorIp) {
+    const verdict = checkRoomCreation(creatorIp);
+
+    if (!verdict.allowed) {
+      const hours = Math.ceil(verdict.retryAfterSeconds / 3600);
+      throw new RoomServiceError(
+        "room_limit_reached",
+        `You can only create one room per day. Please try again in about ${hours}h.`,
+      );
+    }
+  }
 
   await Promise.all([
     ensureRoomNameAllowed(roomName),
@@ -201,6 +218,10 @@ export const createRoom = async (
 
     if (!member) {
       throw new RoomServiceError("unknown", "Room membership could not be created.");
+    }
+
+    if (creatorIp) {
+      recordRoomCreation(creatorIp);
     }
 
     return {
