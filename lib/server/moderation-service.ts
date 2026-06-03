@@ -37,13 +37,21 @@ export type ContentKind = "punishment" | "room_name" | "display_name";
 // Shared block list — the categories are identical across content kinds; only
 // the framing (what the text IS) and the allow-guidance differ per kind.
 const BLOCK_RULES = `BLOCK if it contains, promotes, requests, or even merely mentions any of:
-- gambling: ANY transfer, payment, wager, or loss of money or valuables between people, in \
-ANY direction and ANY amount. This includes the loser paying/giving/sending money to the \
-winner, the winner taking money, buying expensive gifts, or staking assets. \
-Vietnamese cues: "tiền", "đồng", "k", "nghìn", "triệu", "tỷ", "đô", "$", "đưa tiền", \
+- gambling: ANY transfer, payment, wager, staking, surrender, or loss of money OR a valuable \
+asset between people, in ANY direction and ANY amount. This includes the loser paying/giving/\
+sending money to the winner, the winner taking money, buying expensive gifts, or staking / \
+handing over / forfeiting any valuable property. \
+Money cues (VN): "tiền", "đồng", "k", "nghìn", "triệu", "tỷ", "đô", "$", "đưa tiền", \
 "chuyển khoản", "nộp", "cá độ", "cá cược", "đặt cược", "mất tiền", "bao", "chung tiền". \
+Valuable-asset cues (VN): "sổ đỏ", "sổ hồng", "nhà", "đất", "căn hộ", "chung cư", "ô tô", \
+"xe hơi", "xe máy", "xe", "vàng", "kim cương", "trang sức", "điện thoại", "iphone", "laptop", \
+"đồng hồ", "cổ phần", "cổ phiếu", "tài sản", "quyền sở hữu", "giấy tờ xe", "đăng ký xe". \
+Treat the mere naming of such a valuable asset as offering to stake/surrender it. \
 Example: "Đội thua đưa đội thắng 10 triệu" -> BLOCK as gambling. \
-Example: "Loser sends winner $50" -> BLOCK as gambling.
+Example: "Loser sends winner $50" -> BLOCK as gambling. \
+Example: "Sổ đỏ" -> BLOCK as gambling (staking real-estate title). \
+Example: "Quyền sở hữu ô tô hợp pháp" -> BLOCK as gambling (staking a car). \
+Example: "Giao chìa khóa xe máy cho người thắng" -> BLOCK as gambling.
 - sexual: sexual, pornographic, or otherwise NSFW content or acts.
 - violence: gore, graphic violence, or threats/encouragement of physical harm to people or animals.
 - self_harm: self-harm, suicide, or eating-disorder encouragement.
@@ -65,6 +73,13 @@ decide whether it is acceptable.
 
 Be strict. When a punishment is ambiguous or you are unsure, BLOCK it — the cost of letting \
 unsafe content through is far higher than rejecting a borderline dare.
+
+A dare whose content IS a valuable asset, ownership document, or its handover (e.g. "Sổ đỏ", \
+"Quyền sở hữu ô tô", "xe máy", "vàng") counts as staking that asset — BLOCK it as gambling \
+even when no explicit transfer verb is written, because forfeiting it is the implied stake. \
+This is different from a harmless dare that merely involves a physical-labour chore with an \
+object (e.g. "rửa xe cho cả phòng", "dọn nhà cho người thắng") — those cost nothing and are \
+ALLOWED.
 
 ${BLOCK_RULES}
 

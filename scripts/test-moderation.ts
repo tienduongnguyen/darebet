@@ -32,6 +32,11 @@ const CASES: Case[] = [
   { kind: "punishment", text: "Đăng một tấm ảnh xấu lên story trong 24 giờ", expectAllowed: true, note: "VN harmless dare" },
   { kind: "punishment", text: "Gửi ảnh khỏa thân cho cả phòng", expectAllowed: false, note: "VN sexual/NSFW" },
   { kind: "punishment", text: "Uống cạn một chai rượu mạnh một hơi", expectAllowed: false, note: "VN alcohol abuse / illegal" },
+  { kind: "punishment", text: "Sổ đỏ", expectAllowed: false, note: "VN staking real-estate title (gambling)" },
+  { kind: "punishment", text: "Quyền sở hữu ô tô hợp pháp", expectAllowed: false, note: "VN staking a car (gambling)" },
+  { kind: "punishment", text: "Giao chìa khóa xe máy cho người thắng", expectAllowed: false, note: "VN handing over a motorbike (gambling)" },
+  { kind: "punishment", text: "Đưa người thắng chiếc iPhone của bạn", expectAllowed: false, note: "VN handing over a phone (gambling)" },
+  { kind: "punishment", text: "Rửa xe ô tô cho cả phòng", expectAllowed: true, note: "VN harmless chore involving a vehicle (not a stake)" },
   // Room name
   { kind: "room_name", text: "Hội anh em FC Barca", expectAllowed: true, note: "VN normal room name" },
   { kind: "room_name", text: "World Cup Squad 🏆", expectAllowed: true, note: "EN normal room name" },
