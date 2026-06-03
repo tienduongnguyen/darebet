@@ -3,6 +3,7 @@ import { Geist_Mono, Saira, Saira_Condensed } from "next/font/google";
 import "./globals.css";
 
 import { AppProviders } from "@/app/_components/app-providers";
+import { version } from "@/package.json";
 
 const saira = Saira({
   variable: "--font-saira",
@@ -66,6 +67,9 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <AppProviders>{children}</AppProviders>
+        <footer className="mt-auto py-4 text-center font-mono text-xs text-base-content/40">
+          DareBet v{version}
+        </footer>
       </body>
     </html>
   );
